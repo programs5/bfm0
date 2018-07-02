@@ -11,29 +11,32 @@ let privateKey;
 do {
   privateKey = crypto.randomBytes(32);
 } while (!secp256k1.privateKeyVerify(privateKey));
+//console.log("privateKey:" + privateKey.toString("hex"));
 
 // get the public key
 const publicKey = secp256k1.publicKeyCreate(privateKey);
+//console.log("publicKey:" + publicKey.toString("hex"));
 
-writeKey(privateKey, "private.key");
-writeKey(publicKey, "public.key");
+saveKeyFile("private.key", privateKey);
+saveKeyFile("public.key", publicKey);
 
-function writeKey(strKey, fileName) {
-  fs.writeFile(fileName, strKey, function(err) {
-      if(err) {
-          return console.log(err);
-      }
-      console.log(`${fileName} was saved.`);
-  });
+function saveKeyFile(fileName, message) {
+  var file = fs.createWriteStream(fileName);
+  file.on('error', function(err) { console.log(err); });
+  file.write(message);
+  file.end(function () { console.log(`${fileName} saved`); });
 }
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-fs.readFile('private.key', function(err, contents) {
-    console.log("\nReaded: " + contents);
-});
+// read stream:
+// http://codewinds.com/blog/2013-08-04-nodejs-readable-streams.html
 
-console.log("END.");
+
+
+
+
+
 
 /*
 fs.createReadStream(fileName).
