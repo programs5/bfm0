@@ -27,9 +27,19 @@ function writeKey(strKey, fileName) {
   });
 }
 
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+fs.readFile('private.key', function(err, contents) {
+    console.log("\nReaded: " + contents);
+});
+
+console.log("END.");
+
+/*
 fs.createReadStream(fileName).
   pipe(crypto.createHash('sha256').setEncoding('hex')).
   on('finish', function () {
     var digest = this.read();
     console.log(digest);
   })
+*/
