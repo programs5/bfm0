@@ -32,7 +32,7 @@ fs.readFile(fileKey, function (err, data) {
         var dig = this.read();
 
         // загружаем подпись
-        fs.readFile(fileSig, function (err, data) {
+        fs.readFile(fileSig, function(err, data) {
             if (err) {
               return console.log("" + err);
             }
