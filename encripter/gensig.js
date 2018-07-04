@@ -11,7 +11,7 @@ const file = process.argv[2];
 const fileKey = process.argv[3];
 
 // проверяем наличие аргументов
-if(process.argv[2] == undefined || process.argv[3] == undefined) {
+if(file == undefined || fileKey == undefined) {
   console.log("Error: not define input arguments");
   process.exit(1);
 }
